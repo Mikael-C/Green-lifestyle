@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Menu, X } from 'lucide-react';
 import './Header.css';
-import logo from '../../assets/images/logo.jpeg';
+import logo from '../../assets/images/logo.png';
 
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);

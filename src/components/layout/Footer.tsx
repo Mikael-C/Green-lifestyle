@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Globe, Heart, Share2, ArrowRight } from 'lucide-react';
 import './Footer.css';
-import logo2 from '../../assets/images/logo2.jpeg';
+import logo2 from '../../assets/images/logo2.png';
 
 export const Footer: React.FC = () => {
   return (
