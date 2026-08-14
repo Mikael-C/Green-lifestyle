@@ -28,6 +28,7 @@
   height: 50px;
   width: auto;
   border-radius: 8px;
+  mix-blend-mode: multiply;
 }
 
 .desktop-nav ul {
