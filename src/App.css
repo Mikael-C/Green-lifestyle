@@ -1,0 +1,9 @@
+/* App specific styles, most styles are in index.css or styled inline with modules/styled-components if needed */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1;
+}
