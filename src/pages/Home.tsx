@@ -8,7 +8,7 @@ import './Home.css';
 
 // Import images for featured products and banner
 import bannerImage1 from '../assets/images/IMG_2415.jpeg';
-import bannerImage2 from '../assets/images/IMG_2531.jpeg';
+import bannerImage2 from '../assets/images/IMG_2531_transparent.png';
 import feat1 from '../assets/images/IMG_2403.png';
 import feat2 from '../assets/images/IMG_2404.png';
 import feat3 from '../assets/images/IMG_2405.png';
@@ -41,7 +41,13 @@ export const Home: React.FC = () => {
           <motion.div
             key={currentSlide}
             className="hero-background"
-            style={{ backgroundImage: `url(${heroSlides[currentSlide]})` }}
+            style={{ 
+              backgroundImage: `url(${heroSlides[currentSlide]})`,
+              backgroundSize: currentSlide === 1 ? 'contain' : 'cover',
+              backgroundPosition: currentSlide === 1 ? 'right center' : 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: currentSlide === 1 ? '#111827' : 'transparent'
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
