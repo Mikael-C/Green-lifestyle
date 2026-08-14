@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { ProductCard } from '../components/ui/ProductCard';
@@ -7,7 +7,8 @@ import { ModelShowcase } from '../components/ui/ModelShowcase';
 import './Home.css';
 
 // Import images for featured products and banner
-import bannerImage from '../assets/images/IMG_2415.jpeg';
+import bannerImage1 from '../assets/images/IMG_2415.jpeg';
+import bannerImage2 from '../assets/images/IMG_2531.jpeg';
 import feat1 from '../assets/images/IMG_2403.png';
 import feat2 from '../assets/images/IMG_2404.png';
 import feat3 from '../assets/images/IMG_2405.png';
@@ -20,19 +21,40 @@ const featuredProducts = [
   { id: 4, name: 'Recycled Fiber Pants', price: 95.00, image: feat4 },
 ];
 
+const heroSlides = [bannerImage1, bannerImage2];
+
 export const Home: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000); // Change slide every 5 seconds
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="home-page">
-      {/* Hero Banner */}
+      {/* Hero Banner Slider */}
       <section className="hero-section">
-        <div className="hero-background" style={{ backgroundImage: `url(${bannerImage})` }}>
-          <div className="hero-overlay"></div>
-        </div>
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentSlide}
+            className="hero-background"
+            style={{ backgroundImage: `url(${heroSlides[currentSlide]})` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          >
+            <div className="hero-overlay"></div>
+          </motion.div>
+        </AnimatePresence>
         <div className="container hero-content">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
             className="hero-text"
           >
             <h1>Embrace the <span className="highlight-green">Green Lifestyle</span></h1>
