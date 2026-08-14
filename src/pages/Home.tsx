@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { ProductCard } from '../components/ui/ProductCard';
+import { ModelShowcase } from '../components/ui/ModelShowcase';
 import './Home.css';
 
 // Import images for featured products and banner
@@ -47,6 +48,9 @@ export const Home: React.FC = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Model Showcase */}
+      <ModelShowcase />
 
       {/* Featured Products */}
       <section className="featured-section container">

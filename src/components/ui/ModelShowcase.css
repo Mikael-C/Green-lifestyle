@@ -1,0 +1,127 @@
+.model-showcase-section {
+  padding: 5rem 0;
+  overflow: hidden;
+  background-color: var(--color-surface); /* Light background to contrast with main page */
+}
+
+.model-showcase-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.model-showcase-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+}
+
+.model-showcase-header p {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  margin-top: 0.5rem;
+}
+
+.marquee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.marquee-row {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.marquee-row.left {
+  animation: scrollLeft 40s linear infinite;
+}
+
+.marquee-row.right {
+  animation: scrollRight 40s linear infinite;
+}
+
+/* Pause animation on hover for better user experience */
+.marquee-container:hover .marquee-row {
+  animation-play-state: paused;
+}
+
+.model-img-wrapper {
+  width: 260px;
+  height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.model-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.model-img-wrapper:hover img {
+  transform: scale(1.08);
+}
+
+.model-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
+
+.model-img-wrapper:hover .model-overlay {
+  opacity: 1;
+}
+
+.model-overlay-text {
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+.model-img-wrapper:hover .model-overlay-text {
+  transform: translateY(0);
+}
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+@media (max-width: 768px) {
+  .model-showcase-section {
+    padding: 3.5rem 0;
+  }
+  
+  .model-showcase-header h2 {
+    font-size: 2rem;
+  }
+
+  .model-img-wrapper {
+    width: 200px;
+    height: 280px;
+  }
+}
