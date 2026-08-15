@@ -169,7 +169,20 @@
 
 @media (max-width: 768px) {
   .hero-text h1 {
-    font-size: 3rem;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero-text p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .hero-buttons {
+    gap: 0.75rem;
+  }
+  .hero-buttons .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
   }
   .values-grid {
     grid-template-columns: 1fr;
