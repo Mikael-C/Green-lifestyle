@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-color: #34D399; /* Light green that matches the theme but is slightly lighter than primary */
 }
 
 .hero-media {
@@ -22,9 +23,11 @@
 
 @media (min-width: 768px) {
   .hero-media {
-    object-fit: contain;
-    background-size: contain;
-    background-color: #111827; /* sleek dark background to frame the media */
+    width: 75%;
+    left: 12.5%;
+    object-fit: cover;
+    background-size: cover;
+    background-color: transparent;
   }
 }
 
