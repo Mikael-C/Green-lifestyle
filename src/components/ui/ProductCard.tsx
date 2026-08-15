@@ -8,10 +8,11 @@ interface ProductCardProps {
   image: string;
   name: string;
   price: number;
+  color?: string;
   delay?: number;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ image, name, price, delay = 0 }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ image, name, price, color = "Green", delay = 0 }) => {
   return (
     <motion.div 
       className="product-card"
@@ -19,22 +20,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ image, name, price, de
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -5 }}
     >
       <div className="product-image-container">
+        <span className="product-badge">NEW</span>
         <img src={image} alt={name} className="product-image" loading="lazy" />
-        <div className="product-actions-overlay">
-          <button className="action-btn add-cart" title="Add to Cart">
-            <ShoppingCart size={18} />
-          </button>
-          <button className="action-btn buy-now" title="Buy Now">
-            <CreditCard size={18} />
-          </button>
-        </div>
+        <button className="add-btn" aria-label="Add to cart">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
       </div>
       <div className="product-info">
         <h3 className="product-name">{name}</h3>
-        <p className="product-price">${price.toFixed(2)}</p>
+        <p className="product-color">{color}</p>
+        <p className="product-price">₦{price.toLocaleString('en-NG', { minimumFractionDigits: 2 })}</p>
       </div>
     </motion.div>
   );

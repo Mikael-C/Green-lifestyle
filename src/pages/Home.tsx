@@ -7,8 +7,8 @@ import { ModelShowcase } from '../components/ui/ModelShowcase';
 import './Home.css';
 
 // Import images for featured products and banner
-import bannerImage1 from '../assets/images/IMG_2415.jpeg';
-import bannerImage2 from '../assets/images/IMG_2531_transparent.png';
+import videoFile from '../assets/images/video.mp4';
+import sliderImage from '../assets/images/slider.jpeg';
 import feat1 from '../assets/images/IMG_2403.png';
 import feat2 from '../assets/images/IMG_2404.png';
 import feat3 from '../assets/images/IMG_2405.png';
@@ -21,7 +21,10 @@ const featuredProducts = [
   { id: 4, name: 'Recycled Fiber Pants', price: 95.00, image: feat4 },
 ];
 
-const heroSlides = [bannerImage1, bannerImage2];
+const heroSlides = [
+  { type: 'video', src: videoFile },
+  { type: 'image', src: sliderImage }
+];
 
 export const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -29,7 +32,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 6000); // Change slide every 6 seconds to give video time
     return () => clearInterval(timer);
   }, []);
 
@@ -38,24 +41,40 @@ export const Home: React.FC = () => {
       {/* Hero Banner Slider */}
       <section className="hero-section">
         <AnimatePresence mode="popLayout">
-          <motion.div
-            key={currentSlide}
-            className="hero-background"
-            style={{ 
-              backgroundImage: `url(${heroSlides[currentSlide]})`,
-              backgroundSize: currentSlide === 1 ? 'contain' : 'cover',
-              backgroundPosition: currentSlide === 1 ? 'right center' : 'center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: currentSlide === 1 ? '#111827' : 'transparent'
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          >
-            <div className="hero-overlay"></div>
-          </motion.div>
+          {heroSlides[currentSlide].type === 'video' ? (
+            <motion.video
+              key={`video-${currentSlide}`}
+              className="hero-background"
+              src={heroSlides[currentSlide].src}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          ) : (
+            <motion.div
+              key={`image-${currentSlide}`}
+              className="hero-background"
+              style={{ 
+                backgroundImage: `url(${heroSlides[currentSlide].src})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          )}
         </AnimatePresence>
+        {/* We need an overlay that sits on top of either the video or image */}
+        <div className="hero-overlay" style={{ zIndex: 1, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}></div>
         <div className="container hero-content">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

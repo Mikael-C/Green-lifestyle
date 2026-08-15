@@ -1,24 +1,21 @@
 .product-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
-  height: 100%;
+  background: transparent;
   display: flex;
   flex-direction: column;
-}
-
-.product-card:hover {
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.15);
+  transition: transform 0.3s ease;
+  height: 100%;
 }
 
 .product-image-container {
   position: relative;
   width: 100%;
   aspect-ratio: 4/5;
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background-color: #f3f4f6;
+  margin-bottom: 1rem;
 }
 
 .product-image {
@@ -29,69 +26,61 @@
 }
 
 .product-card:hover .product-image {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-.product-actions-overlay {
+.product-badge {
   position: absolute;
-  bottom: -50px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-  transition: bottom 0.3s ease;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #000;
+  z-index: 2;
 }
 
-.product-card:hover .product-actions-overlay {
-  bottom: 0;
-}
-
-.action-btn {
-  background-color: white;
-  color: var(--color-secondary);
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+.add-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  padding: 0.25rem;
+  z-index: 2;
+  transition: opacity 0.2s ease;
 }
 
-.action-btn.add-cart:hover {
-  background-color: var(--color-primary);
-  color: white;
-}
-
-.action-btn.buy-now {
-  background-color: var(--color-secondary);
-  color: white;
-}
-
-.action-btn.buy-now:hover {
-  background-color: var(--color-primary);
+.add-btn:hover {
+  opacity: 0.6;
 }
 
 .product-info {
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
 .product-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--color-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 0.2rem;
+  line-height: 1.4;
+}
+
+.product-color {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.75rem;
 }
 
 .product-price {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--color-primary);
-  margin-top: auto;
+  color: #000;
 }
