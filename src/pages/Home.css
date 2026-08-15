@@ -23,8 +23,8 @@
 
 @media (min-width: 768px) {
   .hero-media {
-    width: 75%;
-    left: 12.5%;
+    width: 50%;
+    left: 25%;
     object-fit: cover;
     background-size: cover;
     background-color: transparent;
