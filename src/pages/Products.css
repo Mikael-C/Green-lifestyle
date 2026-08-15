@@ -25,12 +25,18 @@
 }
 
 .products-container {
-  padding: 4rem 2rem;
+  padding: 4rem 1rem; /* reduced horizontal padding for mobile */
+}
+
+@media (min-width: 768px) {
+  .products-container {
+    padding: 4rem 2rem;
+  }
 }
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 

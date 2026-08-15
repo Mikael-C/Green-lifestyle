@@ -44,13 +44,12 @@ export const Home: React.FC = () => {
           {heroSlides[currentSlide].type === 'video' ? (
             <motion.video
               key={`video-${currentSlide}`}
-              className="hero-background"
+              className="hero-media"
               src={heroSlides[currentSlide].src}
               autoPlay
               muted
               loop
               playsInline
-              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -59,13 +58,8 @@ export const Home: React.FC = () => {
           ) : (
             <motion.div
               key={`image-${currentSlide}`}
-              className="hero-background"
-              style={{ 
-                backgroundImage: `url(${heroSlides[currentSlide].src})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-              }}
+              className="hero-media"
+              style={{ backgroundImage: `url(${heroSlides[currentSlide].src})` }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
