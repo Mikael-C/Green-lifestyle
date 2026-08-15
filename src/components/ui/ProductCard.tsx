@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingCart, CreditCard } from 'lucide-react';
 import './ProductCard.css';
 
 interface ProductCardProps {
