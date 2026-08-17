@@ -8,6 +8,10 @@ import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import './App.css';
 
+import { CartProvider } from './context/CartContext';
+import { CartDrawer } from './components/ui/CartDrawer';
+import { Checkout } from './pages/Checkout';
+
 // Scroll to top on route change
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -19,21 +23,25 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="app-wrapper">
-        <Header />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <CartProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="app-wrapper">
+          <Header />
+          <CartDrawer />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </CartProvider>
   );
 };
 

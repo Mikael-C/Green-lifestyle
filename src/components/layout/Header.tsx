@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Menu, X } from 'lucide-react';
+import { useCart } from '../../context/CartContext';
 import './Header.css';
 import logo from '../../assets/images/logo.png';
 
@@ -9,6 +10,7 @@ export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { totalItems, openCart } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,9 +56,9 @@ export const Header: React.FC = () => {
         </nav>
 
         <div className="header-actions">
-          <button className="cart-btn">
+          <button className="cart-btn" onClick={openCart}>
             <ShoppingBag size={24} />
-            <span className="cart-badge">0</span>
+            {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
           </button>
           
           {/* Mobile Menu Toggle */}
