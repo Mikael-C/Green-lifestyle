@@ -9,10 +9,10 @@ import './Home.css';
 // Import images for featured products and banner
 import videoFile from '../assets/images/video.mp4';
 import sliderImage from '../assets/images/slider.jpeg';
-import feat1 from '../assets/images/IMG_2403.png';
-import feat2 from '../assets/images/IMG_2404.png';
-import feat3 from '../assets/images/IMG_2405.png';
-import feat4 from '../assets/images/IMG_2406.png';
+import feat1 from '../assets/images/prod1.jpeg';
+import feat2 from '../assets/images/prod2.jpeg';
+import feat3 from '../assets/images/prod3.jpeg';
+import feat4 from '../assets/images/prod4.jpeg';
 
 const featuredProducts = [
   { id: 1, name: 'Eco Green Dress', price: 120.00, image: feat1 },

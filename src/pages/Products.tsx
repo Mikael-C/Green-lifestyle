@@ -4,15 +4,15 @@ import { ProductCard } from '../components/ui/ProductCard';
 import './Products.css';
 
 // Import all images
-import img2403 from '../assets/images/IMG_2403.png';
-import img2404 from '../assets/images/IMG_2404.png';
-import img2405 from '../assets/images/IMG_2405.png';
-import img2406 from '../assets/images/IMG_2406.png';
-import img2407 from '../assets/images/IMG_2407.png';
-import img2408 from '../assets/images/IMG_2408.jpeg';
-import img2409 from '../assets/images/IMG_2409.png';
-import img2410 from '../assets/images/IMG_2410.jpeg';
-import img2411 from '../assets/images/IMG_2411.jpeg';
+import prod1 from '../assets/images/prod1.jpeg';
+import prod2 from '../assets/images/prod2.jpeg';
+import prod3 from '../assets/images/prod3.jpeg';
+import prod4 from '../assets/images/prod4.jpeg';
+import prod5 from '../assets/images/prod5.jpeg';
+import prod6 from '../assets/images/prod6.jpeg';
+import prod7 from '../assets/images/prod7.jpeg';
+import prod8 from '../assets/images/prod8.jpeg';
+import prod9 from '../assets/images/prod9.jpeg';
 import img2412 from '../assets/images/IMG_2412.jpeg';
 import img2413 from '../assets/images/IMG_2413.jpeg';
 import img2415 from '../assets/images/IMG_2415.jpeg';
@@ -22,15 +22,15 @@ import img2418 from '../assets/images/IMG_2418.png';
 import img2424 from '../assets/images/IMG_2424.jpeg';
 
 const allProducts = [
-  { id: 1, name: 'Eco Green Dress', price: 120.00, image: img2403 },
-  { id: 2, name: 'Sustainable Jacket', price: 180.00, image: img2404 },
-  { id: 3, name: 'Organic Cotton Top', price: 65.00, image: img2405 },
-  { id: 4, name: 'Recycled Fiber Pants', price: 95.00, image: img2406 },
-  { id: 5, name: 'Classic Green Tee', price: 45.00, image: img2407 },
-  { id: 6, name: 'Hemp Knit Sweater', price: 110.00, image: img2408 },
-  { id: 7, name: 'Bamboo Lounge Wear', price: 85.00, image: img2409 },
-  { id: 8, name: 'Earth-Tone Skirt', price: 75.00, image: img2410 },
-  { id: 9, name: 'Vegan Leather Bag', price: 150.00, image: img2411 },
+  { id: 1, name: 'Eco Green Dress', price: 120.00, image: prod1 },
+  { id: 2, name: 'Sustainable Jacket', price: 180.00, image: prod2 },
+  { id: 3, name: 'Organic Cotton Top', price: 65.00, image: prod3 },
+  { id: 4, name: 'Recycled Fiber Pants', price: 95.00, image: prod4 },
+  { id: 5, name: 'Classic Green Tee', price: 45.00, image: prod5 },
+  { id: 6, name: 'Hemp Knit Sweater', price: 110.00, image: prod6 },
+  { id: 7, name: 'Bamboo Lounge Wear', price: 85.00, image: prod7 },
+  { id: 8, name: 'Earth-Tone Skirt', price: 75.00, image: prod8 },
+  { id: 9, name: 'Vegan Leather Bag', price: 150.00, image: prod9 },
   { id: 10, name: 'Eco-Friendly Shoes', price: 130.00, image: img2412 },
   { id: 11, name: 'Upcycled Denim', price: 105.00, image: img2413 },
   { id: 12, name: 'Nature Inspired Coat', price: 210.00, image: img2415 },
