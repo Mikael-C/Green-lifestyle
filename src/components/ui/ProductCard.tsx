@@ -9,12 +9,13 @@ interface ProductCardProps {
   name: string;
   price: number;
   delay?: number;
+  bg?: string;
 }
 
 const COLORS = ['#111111', '#10B981', '#4B5563', '#D97706', '#EF4444', '#FFFFFF'];
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
-export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price, delay = 0 }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price, delay = 0, bg }) => {
   const { addItem } = useCart();
   const [showOptions, setShowOptions] = useState(false);
   const [selectedColor, setSelectedColor] = useState(COLORS[0]);
@@ -40,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price
       transition={{ duration: 0.5, delay }}
     >
       {/* Image */}
-      <div className="product-image-container">
+      <div className="product-image-container" style={bg ? { backgroundColor: bg } : undefined}>
         <span className="product-badge">NEW</span>
         <img src={image} alt={name} className="product-image" loading="lazy" />
       </div>

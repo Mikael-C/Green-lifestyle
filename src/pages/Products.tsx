@@ -19,7 +19,6 @@ import img2415 from '../assets/images/IMG_2415.jpeg';
 import img2416 from '../assets/images/IMG_2416.jpeg';
 import img2417 from '../assets/images/IMG_2417.png';
 import img2418 from '../assets/images/IMG_2418.png';
-import img2424 from '../assets/images/IMG_2424.jpeg';
 
 const allProducts = [
   { id: 1, name: 'Eco Green Dress', price: 120.00, image: prod1 },
@@ -35,9 +34,8 @@ const allProducts = [
   { id: 11, name: 'Upcycled Denim', price: 105.00, image: img2413 },
   { id: 12, name: 'Nature Inspired Coat', price: 210.00, image: img2415 },
   { id: 13, name: 'Green Pattern Scarf', price: 35.00, image: img2416 },
-  { id: 14, name: 'Organic Linen Shirt', price: 80.00, image: img2417 },
-  { id: 15, name: 'Sustainable Shorts', price: 55.00, image: img2418 },
-  { id: 16, name: 'Eco Activewear', price: 90.00, image: img2424 },
+  { id: 14, name: 'Organic Linen Shirt', price: 80.00, image: img2417, bg: 'white' },
+  { id: 15, name: 'Sustainable Shorts', price: 55.00, image: img2418, bg: 'white' },
 ];
 
 export const Products: React.FC = () => {
@@ -72,6 +70,7 @@ export const Products: React.FC = () => {
               price={product.price}
               image={product.image}
               delay={(index % 4) * 0.1}
+              bg={(product as any).bg}
             />
           ))}
         </div>
