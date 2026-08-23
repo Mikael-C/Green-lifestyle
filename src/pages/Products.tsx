@@ -21,12 +21,12 @@ import img2417 from '../assets/images/IMG_2417.png';
 import img2418 from '../assets/images/IMG_2418.png';
 
 const allProducts = [
-  { id: 1, name: 'Eco Green Dress', price: 120.00, image: prod1 },
-  { id: 2, name: 'Sustainable Jacket', price: 180.00, image: prod2 },
-  { id: 3, name: 'Organic Cotton Top', price: 65.00, image: prod3 },
-  { id: 4, name: 'Recycled Fiber Pants', price: 95.00, image: prod4 },
-  { id: 5, name: 'Classic Green Tee', price: 45.00, image: prod5 },
-  { id: 6, name: 'Hemp Knit Sweater', price: 110.00, image: prod6 },
+  { id: 1, name: 'Collective Star Tees', price: 60000.00, image: prod1 },
+  { id: 2, name: 'Green Revolution Tees', price: 60000.00, image: prod2 },
+  { id: 3, name: 'Galaxy Edition Tank Top', price: 65000.00, image: prod3 },
+  { id: 4, name: 'Collective Star Tees', price: 60000.00, image: prod4 },
+  { id: 5, name: 'Collective Star Tees', price: 60000.00, image: prod5 },
+  { id: 6, name: 'GLS Exclusive Socks', price: 10000.00, image: prod6 },
   { id: 7, name: 'Bamboo Lounge Wear', price: 85.00, image: prod7 },
   { id: 8, name: 'Earth-Tone Skirt', price: 75.00, image: prod8 },
   { id: 9, name: 'Vegan Leather Bag', price: 150.00, image: prod9 },

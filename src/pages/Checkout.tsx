@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, ChevronLeft, CreditCard, Truck, Lock } from 'lucide-react';
+import { PaystackButton } from 'react-paystack';
 import './Checkout.css';
 
 type Step = 'cart' | 'shipping' | 'payment' | 'success';
@@ -21,9 +22,81 @@ export const Checkout: React.FC = () => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleOrder = () => {
+  const shippingCost = totalPrice > 50000 ? 0 : 2500;
+  const grandTotal = totalPrice + shippingCost;
+
+  const handleOrderSuccess = async (response: any) => {
     setStep('success');
     clearCart();
+
+    const orderData = {
+      reference: response.reference,
+      customerInfo: form,
+      orderDetails: {
+        items,
+        totalPrice,
+        shippingCost,
+        grandTotal,
+      },
+      createdAt: new Date().toISOString(),
+    };
+
+    // Run both in parallel — a hanging Firestore will never block the email
+    const [firestoreResult, emailResult] = await Promise.allSettled([
+
+      // ── 1. Save to Firestore ──
+      (async () => {
+        const { db } = await import('../lib/firebase');
+        const { collection, addDoc } = await import('firebase/firestore');
+        await addDoc(collection(db, 'orders'), orderData);
+      })(),
+
+      // ── 2. Verify payment & send owner email ──
+      (async () => {
+        const res = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            reference: response.reference,
+            orderDetails: orderData.orderDetails,
+            customerInfo: form,
+          }),
+        });
+        return res.json();
+      })(),
+    ]);
+
+    // Log Firestore result
+    if (firestoreResult.status === 'fulfilled') {
+      console.log('✅ Order saved to Firestore successfully!');
+    } else {
+      console.warn('⚠️ Firestore save failed (enable it in Firebase Console):', firestoreResult.reason);
+    }
+
+    // Log email result
+    if (emailResult.status === 'fulfilled') {
+      const emailData = emailResult.value;
+      if (emailData?.emailStatus?.sent) {
+        console.log('%c✅ Order email sent successfully!', 'color: green; font-weight: bold; font-size: 14px;');
+        console.log('📧 Email delivered to:', emailData.emailStatus.to);
+      } else {
+        console.warn('%c❌ Order email failed to send.', 'color: red; font-weight: bold; font-size: 14px;');
+        console.warn('Error:', emailData?.emailStatus?.error);
+      }
+      console.log('📦 Full API Response:', emailData);
+    } else {
+      console.error('❌ Error calling verify-payment API:', emailResult.reason);
+    }
+  };
+
+  const paystackProps = {
+    email: form.email || 'customer@example.com',
+    amount: grandTotal * 100,
+    publicKey: import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
+    text: `Pay with Paystack — ₦${grandTotal.toLocaleString('en-NG', { minimumFractionDigits: 2 })}`,
+    onSuccess: (response: any) => handleOrderSuccess(response),
+    onClose: () => {},
+    className: 'btn-green',
   };
 
   const steps = ['cart', 'shipping', 'payment'];
@@ -129,33 +202,13 @@ export const Checkout: React.FC = () => {
             <div className="checkout-main">
               <h2><CreditCard size={20} /> Payment</h2>
               <div className="payment-secure-badge"><Lock size={13} /> Secured by SSL Encryption</div>
-              <div className="card-visual">
-                <div className="card-chip" />
-                <p className="card-number-display">{form.cardNumber || '•••• •••• •••• ••••'}</p>
-                <div className="card-bottom">
-                  <span>{form.cardName || 'CARD HOLDER'}</span>
-                  <span>{form.expiry || 'MM/YY'}</span>
-                </div>
-              </div>
-              <div className="form-grid">
-                {[
-                  { name: 'cardNumber', label: 'Card Number', placeholder: '1234 5678 9012 3456', full: true },
-                  { name: 'cardName', label: 'Name on Card', placeholder: 'John Doe', full: true },
-                  { name: 'expiry', label: 'Expiry Date', placeholder: 'MM/YY', full: false },
-                  { name: 'cvv', label: 'CVV', placeholder: '•••', full: false },
-                ].map(f => (
-                  <div key={f.name} className={`form-group ${f.full ? 'full' : ''}`}>
-                    <label htmlFor={f.name}>{f.label}</label>
-                    <input id={f.name} name={f.name} placeholder={f.placeholder} value={(form as any)[f.name]} onChange={handleChange} maxLength={f.name === 'cvv' ? 3 : undefined} />
-                  </div>
-                ))}
-              </div>
+              <p style={{ marginTop: '20px', color: 'var(--text-light)' }}>
+                You will be redirected to Paystack to complete your payment securely.
+              </p>
             </div>
             <div className="checkout-summary">
               <OrderSummary total={totalPrice} />
-              <button className="btn-green" onClick={handleOrder}>
-                <Lock size={14} /> Place Order — ₦{totalPrice.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
-              </button>
+              <PaystackButton {...paystackProps} />
               <button className="btn-ghost" onClick={() => setStep('shipping')}><ChevronLeft size={14} /> Back to Shipping</button>
             </div>
           </motion.div>

@@ -66,6 +66,30 @@
   gap: 1.5rem;
 }
 
+.auth-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.auth-action-btn:hover {
+  color: var(--color-primary);
+}
+
+.auth-text {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .auth-text {
+    display: inline;
+  }
+}
+
 .cart-btn {
   position: relative;
   color: var(--color-text);

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X, User } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 import logo from '../../assets/images/logo.png';
 
@@ -11,6 +12,7 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { totalItems, openCart } = useCart();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +58,18 @@ export const Header: React.FC = () => {
         </nav>
 
         <div className="header-actions">
+          {user ? (
+            <button className="auth-action-btn" onClick={logout} title="Logout">
+              <User size={22} />
+              <span className="auth-text">Logout</span>
+            </button>
+          ) : (
+            <Link to="/login" className="auth-action-btn">
+              <User size={22} />
+              <span className="auth-text">Login</span>
+            </Link>
+          )}
+          
           <button className="cart-btn" onClick={openCart}>
             <ShoppingBag size={24} />
             {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
