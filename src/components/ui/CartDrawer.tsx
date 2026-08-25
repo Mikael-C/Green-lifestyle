@@ -72,7 +72,9 @@ export const CartDrawer: React.FC = () => {
                       <div className="cart-item-details">
                         <p className="cart-item-name">{item.name}</p>
                         <div className="cart-item-meta">
-                          <span className="cart-item-swatch" style={{ backgroundColor: item.color }} />
+                          {item.color && (
+                            <span className="cart-item-swatch" style={{ backgroundColor: item.color }} />
+                          )}
                           <span className="cart-item-size">{item.size}</span>
                         </div>
                         <p className="cart-item-price">₦{(item.price * item.quantity).toLocaleString('en-NG', { minimumFractionDigits: 2 })}</p>

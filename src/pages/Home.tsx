@@ -9,16 +9,23 @@ import './Home.css';
 // Import images for featured products and banner
 import videoFile from '../assets/images/video.mp4';
 import sliderImage from '../assets/images/slider.jpeg';
-import feat1 from '../assets/images/prod1.jpeg';
-import feat2 from '../assets/images/prod2.jpeg';
-import feat3 from '../assets/images/prod3.jpeg';
-import feat4 from '../assets/images/prod4.jpeg';
+
+// Trending Now — matching products page
+import chainFront from '../assets/images/prod_chain_front.jpg';
+import alienLuxBlackFront from '../assets/images/alien_lux_black_front.jpg';
+import alienLuxWhiteFront from '../assets/images/alien_lux_white_front.jpg';
+import prod1 from '../assets/images/prod1.jpeg';
+
+// Trending Now — back images for hover flip
+import crosshairBack from '../assets/images/prod_crosshair_back.jpg';
+import alienLuxBlackBack from '../assets/images/alien_lux_black_back.jpg';
+import alienLuxWhiteBack from '../assets/images/alien_lux_white_back.jpg';
 
 const featuredProducts = [
-  { id: 1, name: 'Eco Green Dress', price: 120.00, image: feat1 },
-  { id: 2, name: 'Sustainable Jacket', price: 180.00, image: feat2 },
-  { id: 3, name: 'Organic Cotton Top', price: 65.00, image: feat3 },
-  { id: 4, name: 'Recycled Fiber Pants', price: 95.00, image: feat4 },
+  { id: 16, name: 'Green Lifestyle Chain Tee', price: 60000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
+  { id: 17, name: 'Alien Lux',                 price: 60000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
+  { id: 18, name: 'Alien Lux',                 price: 60000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
+  { id: 1,  name: 'Collective Star Tees',      price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
 ];
 
 const heroSlides = [
@@ -115,6 +122,9 @@ export const Home: React.FC = () => {
               name={product.name}
               price={product.price}
               image={product.image}
+              backImage={(product as any).backImage}
+              bg={(product as any).bg}
+              colors={(product as any).colors}
               delay={index * 0.1}
             />
           ))}

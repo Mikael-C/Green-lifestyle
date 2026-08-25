@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../context/CartContext';
 import './ProductCard.css';
@@ -6,34 +6,73 @@ import './ProductCard.css';
 interface ProductCardProps {
   id: string | number;
   image: string;
+  backImage?: string;
   name: string;
   price: number;
   delay?: number;
   bg?: string;
+  colors?: string[];
 }
 
-const COLORS = ['#111111', '#10B981', '#4B5563', '#D97706', '#EF4444', '#FFFFFF'];
-const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const SIZES = ['L', 'XL', 'XXL'];
 
-export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price, delay = 0, bg }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  id,
+  image,
+  backImage,
+  name,
+  price,
+  delay = 0,
+  bg,
+  colors,
+}) => {
   const { addItem } = useCart();
   const [showOptions, setShowOptions] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(COLORS[0]);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        setShowOptions(false);
+      }
+    };
+
+    if (showOptions) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showOptions]);
+  const [selectedColor, setSelectedColor] = useState(colors ? colors[0] : '');
   const [selectedSize, setSelectedSize] = useState('');
   const [added, setAdded] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const hasColors = colors && colors.length > 0;
+  const isMultiColor = colors && colors.length > 1;
+  const displayImage = isFlipped && backImage ? backImage : image;
 
   const handleAddToCart = () => {
     if (!selectedSize) {
       setShowOptions(true);
       return;
     }
-    addItem({ productId: id, name, price, image, color: selectedColor, size: selectedSize });
+    addItem({
+      productId: id,
+      name,
+      price,
+      image,
+      color: hasColors ? selectedColor : undefined,
+      size: selectedSize,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   };
 
   return (
     <motion.div
+      ref={cardRef}
       className="product-card"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -41,17 +80,39 @@ export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price
       transition={{ duration: 0.5, delay }}
     >
       {/* Image */}
-      <div className="product-image-container" style={bg ? { backgroundColor: bg } : undefined}>
+      <div
+        className={`product-image-container${backImage ? ' has-back' : ''}`}
+        style={bg ? { backgroundColor: bg } : undefined}
+        onMouseEnter={() => backImage && setIsFlipped(true)}
+        onMouseLeave={() => backImage && setIsFlipped(false)}
+        onClick={() => backImage && setIsFlipped((f) => !f)}
+      >
         <span className="product-badge">NEW</span>
-        <img src={image} alt={name} className="product-image" loading="lazy" />
+        <motion.img
+          key={displayImage}
+          src={displayImage}
+          alt={name}
+          className="product-image"
+          loading="lazy"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        />
+        {backImage && (
+          <span className="image-flip-hint">
+            {isFlipped ? 'Front' : 'Back'}
+          </span>
+        )}
       </div>
 
       {/* Info */}
       <div className="product-info">
         <h3 className="product-name">{name}</h3>
-        <p className="product-price">₦{price.toLocaleString('en-NG', { minimumFractionDigits: 2 })}</p>
+        <p className="product-price">
+          ₦{price.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
+        </p>
 
-        {/* Color & Size options */}
+        {/* Options panel */}
         <AnimatePresence>
           {showOptions && (
             <motion.div
@@ -61,27 +122,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25 }}
             >
-              {/* Colors */}
-              <div className="options-row">
-                <span className="options-label">Color</span>
-                <div className="color-swatches">
-                  {COLORS.map(c => (
-                    <button
-                      key={c}
-                      className={`color-swatch ${selectedColor === c ? 'selected' : ''}`}
-                      style={{ backgroundColor: c }}
-                      onClick={() => setSelectedColor(c)}
-                      aria-label={c}
-                    />
-                  ))}
+              {/* Color row — always shown when colors exist */}
+              {hasColors && (
+                <div className="options-row">
+                  <span className="options-label">Color</span>
+                  <div className="color-swatches">
+                    {colors!.map((c) => (
+                      <button
+                        key={c}
+                        className={`color-swatch ${selectedColor === c ? 'selected' : ''} ${!isMultiColor ? 'single' : ''}`}
+                        style={{ backgroundColor: c }}
+                        onClick={() => isMultiColor && setSelectedColor(c)}
+                        aria-label={c}
+                        // If only one color, it is always "selected" — no pointer needed
+                        tabIndex={isMultiColor ? 0 : -1}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Sizes */}
               <div className="options-row">
                 <span className="options-label">Size</span>
                 <div className="size-swatches">
-                  {SIZES.map(s => (
+                  {SIZES.map((s) => (
                     <button
                       key={s}
                       className={`size-swatch ${selectedSize === s ? 'selected' : ''}`}
@@ -102,7 +167,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ id, image, name, price
           onClick={handleAddToCart}
           whileTap={{ scale: 0.96 }}
         >
-          {added ? '✓ Added!' : showOptions && !selectedSize ? 'Select Size →' : 'Add to Cart'}
+          {added
+            ? '✓ Added!'
+            : showOptions && !selectedSize
+            ? 'Select Size →'
+            : 'Add to Cart'}
         </motion.button>
       </div>
     </motion.div>

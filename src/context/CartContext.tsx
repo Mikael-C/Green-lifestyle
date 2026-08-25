@@ -6,7 +6,7 @@ export interface CartItem {
   name: string;
   price: number;
   image: string;
-  color: string;
+  color?: string;
   size: string;
   quantity: number;
 }
@@ -32,7 +32,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const addItem = useCallback((newItem: Omit<CartItem, 'id' | 'quantity'>) => {
     setItems(prev => {
-      const existingId = `${newItem.productId}-${newItem.color}-${newItem.size}`;
+      const existingId = `${newItem.productId}-${newItem.color ?? ''}-${newItem.size}`;
       const existing = prev.find(i => i.id === existingId);
       if (existing) {
         return prev.map(i => i.id === existingId ? { ...i, quantity: i.quantity + 1 } : i);
