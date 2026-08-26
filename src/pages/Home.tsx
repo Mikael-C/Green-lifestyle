@@ -11,21 +11,23 @@ import videoFile from '../assets/images/video.mp4';
 import sliderImage from '../assets/images/slider.jpeg';
 
 // Trending Now — matching products page
-import chainFront from '../assets/images/prod_chain_front.jpg';
-import alienLuxBlackFront from '../assets/images/alien_lux_black_front.jpg';
-import alienLuxWhiteFront from '../assets/images/alien_lux_white_front.jpg';
 import prod1 from '../assets/images/prod1.jpeg';
-
-// Trending Now — back images for hover flip
-import crosshairBack from '../assets/images/prod_crosshair_back.jpg';
-import alienLuxBlackBack from '../assets/images/alien_lux_black_back.jpg';
-import alienLuxWhiteBack from '../assets/images/alien_lux_white_back.jpg';
+import prod2 from '../assets/images/prod2.jpeg';
+import prod3 from '../assets/images/prod3.jpeg';
+import prod4 from '../assets/images/prod4.jpeg';
+import prod7 from '../assets/images/prod7.jpeg';
+import prod8 from '../assets/images/prod8.jpeg';
 
 const featuredProducts = [
-  { id: 16, name: 'Green Lifestyle Chain Tee', price: 60000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
-  { id: 17, name: 'Alien Lux',                 price: 60000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
-  { id: 18, name: 'Alien Lux',                 price: 60000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
+  // Collective Star Tees
   { id: 1,  name: 'Collective Star Tees',      price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
+  { id: 4,  name: 'Collective Star Tees',      price: 60000.00, image: prod4, colors: ['#111111'] },
+  // Green Revolution Tees
+  { id: 2,  name: 'Green Revolution Tees',     price: 60000.00, image: prod2, colors: ['#111111'] },
+  { id: 8,  name: 'Green Revolution Tees',     price: 60000.00, image: prod8, colors: ['#FFFFFF'] },
+  // Galaxy Edition Tank Top
+  { id: 3,  name: 'Galaxy Edition Tank Top',   price: 65000.00, image: prod3, colors: ['#111111'] },
+  { id: 7,  name: 'Galaxy Edition Tank Top',   price: 65000.00, image: prod7, colors: ['#FFFFFF'] },
 ];
 
 const heroSlides = [

@@ -37,13 +37,6 @@ interface Product {
 }
 
 const allProducts: Product[] = [
-  // Chain Tee — white
-  { id: 16, name: 'Green Lifestyle Chain Tee', price: 60000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
-
-  // Alien Lux — black & white variants (separate cards)
-  { id: 17, name: 'Alien Lux', price: 60000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
-  { id: 18, name: 'Alien Lux', price: 60000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
-
   // Collective Star Tees — white (prod1) & black (prod4)
   { id: 1,  name: 'Collective Star Tees',    price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
   { id: 4,  name: 'Collective Star Tees',    price: 60000.00, image: prod4, colors: ['#111111'] },
@@ -55,6 +48,13 @@ const allProducts: Product[] = [
   // Galaxy Edition Tank Top — black (prod3) & white (prod7)
   { id: 3,  name: 'Galaxy Edition Tank Top', price: 65000.00, image: prod3, colors: ['#111111'] },
   { id: 7,  name: 'Galaxy Edition Tank Top', price: 65000.00, image: prod7, colors: ['#FFFFFF'] },
+
+  // Chain Tee — white
+  { id: 16, name: 'Green Lifestyle Chain Tee', price: 60000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
+
+  // Alien Lux — black & white variants (separate cards)
+  { id: 17, name: 'Alien Lux', price: 60000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
+  { id: 18, name: 'Alien Lux', price: 60000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
 
   // GLS Exclusive Socks — black (prod6) & white (prod9)
   { id: 6,  name: 'GLS Exclusive Socks',     price: 10000.00, image: prod6, colors: ['#111111'] },

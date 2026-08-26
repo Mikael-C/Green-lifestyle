@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './About.css';
-import aboutImg from '../assets/images/IMG_2417.png';
+import aboutImg from '../assets/images/alien_skate.jpg';
 
 export const About: React.FC = () => {
   return (
