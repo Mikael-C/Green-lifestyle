@@ -18,7 +18,13 @@ import prod4 from '../assets/images/prod4.jpeg';
 import prod7 from '../assets/images/prod7.jpeg';
 import prod8 from '../assets/images/prod8.jpeg';
 
+// New Product images
+import greenLifestyleTeeFront from '../assets/images/green_lifestyle_tee_front.jpg';
+import greenLifestyleTeeBack from '../assets/images/green_lifestyle_tee_back.jpg';
+
 const featuredProducts = [
+  // Green Lifestyle Tee
+  { id: 19, name: 'Green Lifestyle Tee',       price: 45000.00, image: greenLifestyleTeeFront, backImage: greenLifestyleTeeBack, colors: ['#111111'] },
   // Collective Star Tees
   { id: 1,  name: 'Collective Star Tees',      price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
   { id: 4,  name: 'Collective Star Tees',      price: 60000.00, image: prod4, colors: ['#111111'] },

@@ -26,6 +26,10 @@ import alienLuxWhiteFront from '../assets/images/alien_lux_white_front.jpg';
 import alienLuxWhiteBack from '../assets/images/alien_lux_white_back.jpg';
 import alienLuxBlackBack from '../assets/images/alien_lux_black_back.jpg';
 
+// Green Lifestyle Tee images
+import greenLifestyleTeeFront from '../assets/images/green_lifestyle_tee_front.jpg';
+import greenLifestyleTeeBack from '../assets/images/green_lifestyle_tee_back.jpg';
+
 interface Product {
   id: number;
   name: string;
@@ -38,6 +42,9 @@ interface Product {
 }
 
 const allProducts: Product[] = [
+  // Green Lifestyle Tee
+  { id: 19, name: 'Green Lifestyle Tee', price: 45000.00, image: greenLifestyleTeeFront, backImage: greenLifestyleTeeBack, colors: ['#111111'] },
+
   // Collective Star Tees — white (prod1) & black (prod4)
   { id: 1,  name: 'Collective Star Tees',    price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
   { id: 4,  name: 'Collective Star Tees',    price: 60000.00, image: prod4, colors: ['#111111'] },
