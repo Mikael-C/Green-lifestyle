@@ -53,6 +53,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const isMultiColor = colors && colors.length > 1;
   const displayImage = isFlipped && backImage ? backImage : image;
 
+  const discountedPrice = price * 0.90;
+
   const handleAddToCart = () => {
     if (!selectedSize) {
       setShowOptions(true);
@@ -61,7 +63,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     addItem({
       productId: id,
       name,
-      price,
+      price: discountedPrice,
       image,
       color: hasColors ? selectedColor : undefined,
       size: selectedSize,
@@ -87,7 +89,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         onMouseLeave={() => backImage && setIsFlipped(false)}
         onClick={() => backImage && setIsFlipped((f) => !f)}
       >
-        <span className="product-badge">NEW</span>
+        <div className="product-badges" style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '5px', zIndex: 2 }}>
+          <span className="product-badge" style={{ position: 'static' }}>NEW</span>
+          <span className="product-badge discount-badge" style={{ position: 'static', backgroundColor: '#e74c3c' }}>-10%</span>
+        </div>
         <motion.img
           key={displayImage}
           src={displayImage}
@@ -108,9 +113,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Info */}
       <div className="product-info">
         <h3 className="product-name">{name}</h3>
-        <p className="product-price">
-          ₦{price.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
-        </p>
+        <div className="product-price-container" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.5rem' }}>
+          <p className="product-price original-price" style={{ textDecoration: 'line-through', color: '#999', fontSize: '0.9em', margin: 0 }}>
+            ₦{price.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
+          </p>
+          <p className="product-price discounted-price" style={{ color: '#10B981', fontWeight: 'bold', margin: 0 }}>
+            ₦{discountedPrice.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
+          </p>
+        </div>
 
         {/* Options panel */}
         <AnimatePresence>
