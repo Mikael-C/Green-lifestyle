@@ -34,6 +34,7 @@ interface Product {
   backImage?: string;
   bg?: string;
   colors?: string[];
+  isSoldOut?: boolean;
 }
 
 const allProducts: Product[] = [
