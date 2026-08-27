@@ -87,9 +87,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div
         className={`product-image-container${backImage && !isSoldOut ? ' has-back' : ''}`}
         style={bg ? { backgroundColor: bg } : undefined}
-        onMouseEnter={() => backImage && !isSoldOut && setIsFlipped(true)}
-        onMouseLeave={() => backImage && !isSoldOut && setIsFlipped(false)}
-        onClick={() => backImage && !isSoldOut && setIsFlipped((f) => !f)}
+        onMouseEnter={() => {
+          if (window.matchMedia('(hover: hover)').matches && backImage && !isSoldOut) setIsFlipped(true);
+        }}
+        onMouseLeave={() => {
+          if (window.matchMedia('(hover: hover)').matches && backImage && !isSoldOut) setIsFlipped(false);
+        }}
+        onClick={() => {
+          if (backImage && !isSoldOut) setIsFlipped((f) => !f);
+        }}
       >
         <div className="product-badges" style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '5px', zIndex: 2 }}>
           {isSoldOut ? (
