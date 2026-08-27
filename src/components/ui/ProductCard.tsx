@@ -12,6 +12,7 @@ interface ProductCardProps {
   delay?: number;
   bg?: string;
   colors?: string[];
+  isSoldOut?: boolean;
 }
 
 const SIZES = ['L', 'XL', 'XXL'];
@@ -25,6 +26,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   delay = 0,
   bg,
   colors,
+  isSoldOut = false,
 }) => {
   const { addItem } = useCart();
   const [showOptions, setShowOptions] = useState(false);
@@ -83,15 +85,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* Image */}
       <div
-        className={`product-image-container${backImage ? ' has-back' : ''}`}
+        className={`product-image-container${backImage && !isSoldOut ? ' has-back' : ''}`}
         style={bg ? { backgroundColor: bg } : undefined}
-        onMouseEnter={() => backImage && setIsFlipped(true)}
-        onMouseLeave={() => backImage && setIsFlipped(false)}
-        onClick={() => backImage && setIsFlipped((f) => !f)}
+        onMouseEnter={() => backImage && !isSoldOut && setIsFlipped(true)}
+        onMouseLeave={() => backImage && !isSoldOut && setIsFlipped(false)}
+        onClick={() => backImage && !isSoldOut && setIsFlipped((f) => !f)}
       >
         <div className="product-badges" style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '5px', zIndex: 2 }}>
-          <span className="product-badge" style={{ position: 'static' }}>NEW</span>
-          <span className="product-badge discount-badge" style={{ position: 'static', backgroundColor: '#e74c3c' }}>-10%</span>
+          {isSoldOut ? (
+            <span className="product-badge sold-out-badge" style={{ position: 'static', backgroundColor: '#333' }}>SOLD OUT</span>
+          ) : (
+            <span className="product-badge" style={{ position: 'static' }}>NEW</span>
+          )}
+          {!isSoldOut && <span className="product-badge discount-badge" style={{ position: 'static', backgroundColor: '#e74c3c' }}>-10%</span>}
         </div>
         <motion.img
           key={displayImage}
@@ -102,8 +108,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
+          style={{ opacity: isSoldOut ? 0.6 : 1, filter: isSoldOut ? 'grayscale(0.5)' : 'none' }}
         />
-        {backImage && (
+        {backImage && !isSoldOut && (
           <span className="image-flip-hint">
             {isFlipped ? 'Front' : 'Back'}
           </span>
@@ -124,7 +131,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
         {/* Options panel */}
         <AnimatePresence>
-          {showOptions && (
+          {showOptions && !isSoldOut && (
             <motion.div
               className="product-options"
               initial={{ opacity: 0, height: 0 }}
@@ -175,9 +182,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <motion.button
           className={`add-to-cart-btn ${added ? 'added' : ''}`}
           onClick={handleAddToCart}
-          whileTap={{ scale: 0.96 }}
+          whileTap={isSoldOut ? undefined : { scale: 0.96 }}
+          disabled={isSoldOut}
+          style={{ opacity: isSoldOut ? 0.6 : 1, cursor: isSoldOut ? 'not-allowed' : 'pointer' }}
         >
-          {added
+          {isSoldOut
+            ? 'Sold Out'
+            : added
             ? '✓ Added!'
             : showOptions && !selectedSize
             ? 'Select Size →'

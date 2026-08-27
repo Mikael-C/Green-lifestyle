@@ -50,11 +50,11 @@ const allProducts: Product[] = [
   { id: 7,  name: 'Galaxy Edition Tank Top', price: 65000.00, image: prod7, colors: ['#FFFFFF'] },
 
   // Chain Tee — white
-  { id: 16, name: 'Green Lifestyle Chain Tee', price: 60000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
+  { id: 16, name: 'Green Lifestyle Chain Tee', price: 45000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
 
   // Alien Lux — black & white variants (separate cards)
-  { id: 17, name: 'Alien Lux', price: 60000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
-  { id: 18, name: 'Alien Lux', price: 60000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
+  { id: 17, name: 'Alien Lux', price: 45000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
+  { id: 18, name: 'Alien Lux', price: 45000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
 
   // GLS Exclusive Socks — black (prod6) & white (prod9)
   { id: 6,  name: 'GLS Exclusive Socks',     price: 10000.00, image: prod6, colors: ['#111111'] },
@@ -63,11 +63,11 @@ const allProducts: Product[] = [
 
 
   // Zero Panic Tees — black
-  { id: 13, name: 'Zero Panic Tees',         price: 60000.00, image: img2416, colors: ['#111111'] },
+  { id: 13, name: 'Zero Panic Tees',         price: 60000.00, image: img2416, colors: ['#111111'], isSoldOut: true },
 
   // Green Lifestyle Tank Top — white (img2417) & black (img2418)
-  { id: 14, name: 'Green Lifestyle Tank Top', price: 35000.00, image: img2417, bg: 'white', colors: ['#FFFFFF'] },
-  { id: 15, name: 'Green Lifestyle Tank Top', price: 35000.00, image: img2418, colors: ['#111111'] },
+  { id: 14, name: 'Green Lifestyle Tank Top', price: 25000.00, image: img2417, bg: 'white', colors: ['#FFFFFF'] },
+  { id: 15, name: 'Green Lifestyle Tank Top', price: 25000.00, image: img2418, colors: ['#111111'], isSoldOut: true },
 ];
 
 export const Products: React.FC = () => {
@@ -105,6 +105,7 @@ export const Products: React.FC = () => {
               delay={(index % 4) * 0.1}
               bg={product.bg}
               colors={product.colors}
+              isSoldOut={product.isSoldOut}
             />
           ))}
         </div>
