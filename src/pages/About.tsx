@@ -15,16 +15,24 @@ export const About: React.FC = () => {
         >
           <div className="about-text">
             <h1>Our <span className="highlight-green">Story</span></h1>
-            <h2>Fashion that doesn't cost the Earth.</h2>
             <p>
-              Green Lifestyle was born out of a simple idea: fashion should be beautiful, sustainable, and accessible. We believe that looking good shouldn't come at the expense of our planet.
+              Born in Nigeria in 2024, GREEN LIFESTYLE BRAND is a luxury street-fashion label built for those who aren’t afraid to stand out.
             </p>
             <p>
-              Founded in 2023, we set out to create a clothing line that respects the environment and the people who make it. From sourcing organic and recycled materials to ensuring fair wages in our supply chain, every decision we make is guided by our commitment to sustainability.
+              Founded by OKEREKE RAPHAEL IKECHUKWU, a proud Nigerian, fashion lover, and visionary, GREEN LIFESTYLE was created from one simple belief:
+            </p>
+            <h2>Fashion should never be BORING.</h2>
+            <p>
+              From statement tees and jerseys to two-piece sets, tank tops, socks, and more, we blend street culture, luxury, comfort, and individuality into pieces made to turn heads.
             </p>
             <p>
-              Join us in our mission to change the fashion industry for the better. Embrace the Green Lifestyle.
+              We’re not here to follow trends.<br />
+              We’re here to create our own.
             </p>
+            <p>
+              <strong>Rooted in Nigeria. Inspired by the world.</strong>
+            </p>
+            <p>GREEN LIFESTYLE —</p>
           </div>
           <div className="about-image-container">
             <img src={aboutImg} alt="Sustainable Fashion" className="about-image" />

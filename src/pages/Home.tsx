@@ -15,16 +15,15 @@ import prod1 from '../assets/images/prod1.jpeg';
 import prod2 from '../assets/images/prod2.jpeg';
 import prod3 from '../assets/images/prod3.jpeg';
 import prod4 from '../assets/images/prod4.jpeg';
+import prod6 from '../assets/images/prod6.jpeg';
 import prod7 from '../assets/images/prod7.jpeg';
 import prod8 from '../assets/images/prod8.jpeg';
-
-// New Product images
-import greenLifestyleTeeFront from '../assets/images/green_lifestyle_tee_front.jpg';
-import greenLifestyleTeeBack from '../assets/images/green_lifestyle_tee_back.jpg';
+import prod9 from '../assets/images/prod9.jpeg';
 
 const featuredProducts = [
-  // Green Lifestyle Tee
-  { id: 19, name: 'Green Lifestyle Tee',       price: 45000.00, image: greenLifestyleTeeFront, backImage: greenLifestyleTeeBack, colors: ['#111111'] },
+  // GLS Exclusive Socks
+  { id: 6,  name: 'GLS Exclusive Socks',      price: 10000.00, image: prod6, colors: ['#111111'] },
+  { id: 9,  name: 'GLS Exclusive Socks',      price: 10000.00, image: prod9, colors: ['#FFFFFF'] },
   // Collective Star Tees
   { id: 1,  name: 'Collective Star Tees',      price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
   { id: 4,  name: 'Collective Star Tees',      price: 60000.00, image: prod4, colors: ['#111111'] },
@@ -150,9 +149,9 @@ export const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="value-icon">🌿</div>
-              <h3>100% Organic</h3>
-              <p>All our materials are sourced from certified organic farms, ensuring no harmful chemicals touch your skin.</p>
+              <div className="value-icon">🌍</div>
+              <h3>Global Reach</h3>
+              <p>Take Nigerian street fashion to the world and establish GREEN LIFESTYLE as a recognized global brand.</p>
             </motion.div>
             <motion.div 
               className="value-card"
@@ -161,9 +160,9 @@ export const Home: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="value-icon">♻️</div>
-              <h3>Recycled Packaging</h3>
-              <p>We use 100% recycled and biodegradable packaging for every order to minimize our carbon footprint.</p>
+              <div className="value-icon">⚡</div>
+              <h3>Bold Identity</h3>
+              <p>Create unique, statement-making pieces that push streetwear forward and set new trends.</p>
             </motion.div>
             <motion.div 
               className="value-card"
@@ -173,8 +172,8 @@ export const Home: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               <div className="value-icon">🤝</div>
-              <h3>Fair Trade</h3>
-              <p>We ensure fair wages and safe working conditions for everyone involved in creating our garments.</p>
+              <h3>Brand Community</h3>
+              <p>Build a strong community of people who connect with the style, confidence, and lifestyle behind GREEN LIFESTYLE.</p>
             </motion.div>
           </div>
         </div>
