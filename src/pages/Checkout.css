@@ -483,6 +483,7 @@
     grid-column: 1;
   }
 
+
   .checkout-progress {
     padding: 1rem 0.5rem;
     gap: 0;
@@ -490,5 +491,92 @@
 
   .progress-line {
     width: 30px;
+  }
+}
+
+/* ── International Shipping Banner ── */
+.intl-shipping-banner {
+  margin-top: 2rem;
+  padding: 1.2rem 1.4rem;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border: 1.5px solid #86efac;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.intl-shipping-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  flex: 1;
+  min-width: 0;
+  color: #166534;
+}
+
+.intl-shipping-info svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #16a34a;
+}
+
+.intl-shipping-info strong {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #14532d;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.intl-shipping-info p {
+  font-size: 0.82rem;
+  color: #166534;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1.2rem;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.25s;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+  flex-shrink: 0;
+}
+
+.btn-whatsapp:hover {
+  background: #128C7E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,211,102,0.45);
+}
+
+/* Shipping pending text */
+.shipping-pending {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+@media (max-width: 500px) {
+  .intl-shipping-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .btn-whatsapp {
+    width: 100%;
+    justify-content: center;
   }
 }
