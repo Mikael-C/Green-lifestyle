@@ -51,20 +51,20 @@ interface Product {
 
 const allProducts: Product[] = [
   // Collective Star Tees — white (prod1) & black (prod4)
-  { id: 1,  name: 'Collective Star Tees',    price: 60000.00, image: prod1, colors: ['#FFFFFF'] },
-  { id: 4,  name: 'Collective Star Tees',    price: 60000.00, image: prod4, colors: ['#111111'] },
+  { id: 1,  name: 'Collective Star Tees',    price: 65000.00, image: prod1, colors: ['#FFFFFF'] },
+  { id: 4,  name: 'Collective Star Tees',    price: 65000.00, image: prod4, colors: ['#111111'] },
 
   // GLS Exclusive Socks — black (prod6) & white (prod9)
   { id: 6,  name: 'GLS Exclusive Socks',     price: 10000.00, image: prod6, colors: ['#111111'] },
   { id: 9,  name: 'GLS Exclusive Socks',     price: 10000.00, image: prod9, colors: ['#FFFFFF'] },
 
   // Green Revolution Tees — black (prod2) & white (prod8)
-  { id: 2,  name: 'Green Revolution Tees',   price: 60000.00, image: prod2, colors: ['#111111'] },
-  { id: 8,  name: 'Green Revolution Tees',   price: 60000.00, image: prod8, colors: ['#FFFFFF'] },
+  { id: 2,  name: 'Green Revolution Tees',   price: 65000.00, image: prod2, colors: ['#111111'] },
+  { id: 8,  name: 'Green Revolution Tees',   price: 65000.00, image: prod8, colors: ['#FFFFFF'] },
 
   // Galaxy Edition Tank Top — black (prod3) & white (prod7)
-  { id: 3,  name: 'Galaxy Edition Tank Top', price: 65000.00, image: prod3, colors: ['#111111'] },
-  { id: 7,  name: 'Galaxy Edition Tank Top', price: 65000.00, image: prod7, colors: ['#FFFFFF'] },
+  { id: 3,  name: 'Galaxy Edition Tank Top', price: 60000.00, image: prod3, colors: ['#111111'] },
+  { id: 7,  name: 'Galaxy Edition Tank Top', price: 60000.00, image: prod7, colors: ['#FFFFFF'] },
 
   // Chain Tee — white & black
   { id: 16, name: 'Green Lifestyle Chain Tee', price: 45000.00, image: chainFront, backImage: crosshairBack, bg: 'white', colors: ['#FFFFFF'] },
