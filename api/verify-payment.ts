@@ -40,20 +40,30 @@ export default async function handler(req, res) {
             },
           });
 
-          const itemsHtml = orderDetails.items.map(item => `
+          const origin = req.headers.origin || (req.headers.host ? `https://${req.headers.host}` : 'https://greenlifestyle.com');
+
+          const itemsHtml = orderDetails.items.map((item: any) => {
+            const imageStr = item.image || '';
+            const imageUrl = imageStr.startsWith('http') ? imageStr : `${origin}${imageStr.startsWith('/') ? '' : '/'}${imageStr}`;
+            const colorHtml = item.color 
+              ? `| Color: <span style="display:inline-block; width:12px; height:12px; background-color:${item.color}; border-radius:50%; border:1px solid #ccc; vertical-align:-1px; margin: 0 4px;"></span> ` 
+              : '';
+              
+            return `
             <tr>
               <td style="padding: 10px; border-bottom: 1px solid #ddd;">
-                <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+                <img src="${imageUrl}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
               </td>
               <td style="padding: 10px; border-bottom: 1px solid #ddd;">
                 <strong>${item.name}</strong><br />
-                Size: ${item.size} | Qty: ${item.quantity}
+                Size: ${item.size} ${colorHtml}| Qty: ${item.quantity}
               </td>
               <td style="padding: 10px; border-bottom: 1px solid #ddd; text-align: right;">
                 ₦${(item.price * item.quantity).toLocaleString('en-NG', { minimumFractionDigits: 2 })}
               </td>
             </tr>
-          `).join('');
+            `;
+          }).join('');
 
           const mailOptions = {
             from: process.env.EMAIL_USER,
