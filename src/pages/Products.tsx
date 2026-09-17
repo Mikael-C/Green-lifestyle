@@ -75,7 +75,7 @@ const allProducts: Product[] = [
   { id: 20, name: 'Green Lifestyle Tee', price: 45000.00, image: greenLifestyleTeeWhiteFront, backImage: greenLifestyleTeeWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
 
   // Alien Lux — black & white & green variants (separate cards)
-  { id: 17, name: 'Alien Lux', price: 45000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'] },
+  { id: 17, name: 'Alien Lux', price: 45000.00, image: alienLuxBlackFront, backImage: alienLuxBlackBack, colors: ['#111111'], isSoldOut: true },
   { id: 18, name: 'Alien Lux', price: 45000.00, image: alienLuxWhiteFront, backImage: alienLuxWhiteBack, bg: 'white', colors: ['#FFFFFF'] },
   { id: 21, name: 'Alien Lux', price: 45000.00, image: alienLuxGreenFront, backImage: alienLuxGreenBack, colors: ['#00A859'] },
 

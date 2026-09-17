@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +9,16 @@ import './Checkout.css';
 type Step = 'cart' | 'shipping' | 'payment' | 'success';
 
 const WHATSAPP_NUMBER = '2347032700774';
-const NIGERIA_SHIPPING = 5000;
+const ENUGU_SHIPPING = 5000;
+const OUTSIDE_ENUGU_SHIPPING = 10000;
 
 const hasAddress = (form: { address: string; city: string; state: string }) =>
   form.address.trim().length > 0 && form.city.trim().length > 0 && form.state.trim().length > 0;
+
+const getShippingCost = (state: string) => {
+  if (state.trim().toLowerCase().includes('enugu')) return ENUGU_SHIPPING;
+  return OUTSIDE_ENUGU_SHIPPING;
+};
 
 const buildWhatsAppMessage = (
   items: { name: string; quantity: number; price: number; size?: string }[],
@@ -53,7 +59,7 @@ export const Checkout: React.FC = () => {
   };
 
   const addressFilled = hasAddress(form);
-  const shippingCost = addressFilled ? NIGERIA_SHIPPING : 0;
+  const shippingCost = addressFilled ? getShippingCost(form.state) : 0;
   const grandTotal = totalPrice + shippingCost;
 
   const handleOrderSuccess = async (response: any) => {
@@ -209,7 +215,7 @@ export const Checkout: React.FC = () => {
             </div>
 
             <div className="checkout-summary">
-              <OrderSummary total={totalPrice} addressFilled={addressFilled} />
+              <OrderSummary total={totalPrice} addressFilled={addressFilled} state={form.state} />
               <button className="btn-green" onClick={() => setStep('payment')}>Continue to Payment</button>
               <button className="btn-ghost" onClick={() => setStep('cart')}><ChevronLeft size={14} /> Back to Cart</button>
             </div>
@@ -226,7 +232,7 @@ export const Checkout: React.FC = () => {
               </p>
             </div>
             <div className="checkout-summary">
-              <OrderSummary total={totalPrice} addressFilled={true} />
+              <OrderSummary total={totalPrice} addressFilled={true} state={form.state} />
               <PaystackButton {...paystackProps} />
               <button className="btn-ghost" onClick={() => setStep('shipping')}><ChevronLeft size={14} /> Back to Shipping</button>
             </div>
@@ -256,10 +262,11 @@ export const Checkout: React.FC = () => {
 interface OrderSummaryProps {
   total: number;
   addressFilled: boolean;
+  state?: string;
 }
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({ total, addressFilled }) => {
-  const shipping = addressFilled ? NIGERIA_SHIPPING : null;
+const OrderSummary: React.FC<OrderSummaryProps> = ({ total, addressFilled, state = '' }) => {
+  const shipping = addressFilled ? getShippingCost(state) : null;
   const grandTotal = total + (shipping ?? 0);
   return (
     <div className="order-summary">
